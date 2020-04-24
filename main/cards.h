@@ -9,23 +9,33 @@
 
 using namespace std;
 
-class Cards
+class Card
 {
-	Cards(string c = "", Cards* n = nullptr);
+	Card(string c = "", Card* n = nullptr);
 
 private:
-	Cards* next;
+	Card* next;
 	string card;
 
 };
 
 class Player {
+	Player();
 
+private:
+	string name;
 
 };
 
 
 class CardList {
+	CardList();
+
+
+
+private:
+	Card* head;
+
 
 };
 
