@@ -37,9 +37,9 @@ int main(int argv, char** argc){
     
   cout << potato.size() << endl;
   cout << potato << endl;
-  cout << "uh" << endl;
+
   
-  //potato.remove(1);
+  potato.remove(1);
   cout << potato.size() << endl;
 
   cout << potato;

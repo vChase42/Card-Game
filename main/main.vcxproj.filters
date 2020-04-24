@@ -21,15 +21,9 @@
     <ClCompile Include="cards.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testcards.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cards.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="testcards.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

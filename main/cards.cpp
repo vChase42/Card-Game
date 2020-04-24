@@ -64,6 +64,7 @@ void CardList::remove(const int n){
 
 }
 
+
 string CardList::search_remove(const string c){
   Card* cur = head;
   string output;
@@ -122,4 +123,5 @@ ostream& operator<<(ostream& out, CardList& list){
   for(int i=0;i<list.size();i++){
     out << list.at(i) << endl;
   }
+  return out;
 }

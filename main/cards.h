@@ -13,35 +13,33 @@ using namespace std;
 //struct for node Card
 struct Card
 {
-	Card* next;
+    Card* next;
 	string data;
+    
+    Card(string c = "", Card* n = nullptr): data(c), next(n) {}
 
-  Card(string c = "", Card* n = nullptr): data(c), next(n) {}
-
-  bool operator==(Card c) const; //boolean operator to compare data of
-                                 //card to a given card value;
+    bool operator==(Card c) const; //boolean operator to compare data of card to a given card value
 };
 
 class CardList {
 public:
-  //Constructors
-	CardList(); //NULL constructor
-  CardList(ifstream file); //creates linkedlist given file
+    //Constructors
+	CardList(); //Empty List constructor
+    CardList(ifstream file); //creates linkedlist given file
 
-  //Destructor
-  ~CardList(); 
+  
+    ~CardList(); //Destructor
 
-  //mutators functions
-  void append(const string c); //adds card c to end of list
-  void remove(const int n);     //removes card at index n
-  void clear();                //completely empties a list
-  string search_remove(const string c);//removes first card that                                             matches the given string
+    //mutators functions
+    void append(const string c); //adds card c to end of list
+    void remove(const int n);     //removes card at index n
+    string search_remove(const string c);   //removes first card that matches the given string
 
-  //accessor functions
-  friend ostream& operator<<(ostream& out, CardList& list); //output remaining cards in list
-  bool empty() const;          //returns true if empty, false if not empty
-  string at(const int n) const;   //returns card at index n
-  int size() const;               //returns size of list
+    //accessor functions
+    friend ostream& operator<<(ostream& out, CardList& list); //output remaining cards in list
+    bool empty() const;          //returns true if empty, false if not empty
+    string at(const int n) const;   //returns card at index n
+    int size() const;               //returns size of list
 
 private:
 	Card* head;
@@ -52,12 +50,12 @@ private:
 class Player {
 	Player();
 
-  void turn(Player p); //executes code for a player's turn
+    void turn(Player p); //executes code for a player's turn
 
 
 private:
 	string name;
-  CardList cards;
+    CardList cards;
 
 };
 
