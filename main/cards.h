@@ -5,21 +5,30 @@
 #ifndef CARDS_H
 #define CARDS_H
 
-class cards
+#include <string>
+
+using namespace std;
+
+class Cards
 {
+	Cards(string c = "", Cards* n = nullptr);
+
+private:
+	Cards* next;
+	string card;
+
+};
+
+class Player {
 
 
 };
 
-class player {
 
-
-};
-
-
-class cardList {
+class CardList {
 
 };
+
 
 #endif
 
