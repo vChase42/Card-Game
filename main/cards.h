@@ -6,9 +6,11 @@
 #define CARDS_H
 
 #include <string>
+#include <ostream>
 
 using namespace std;
 
+//struct for node Card
 struct Card
 {
 	Card* next;
@@ -16,13 +18,41 @@ struct Card
 
   Card(string c = "", Card* n = nullptr): data(c), next(n) {}
 
-  bool operator==(Card c) const;
+  bool operator==(Card c) const; //boolean operator to compare data of
+                                 //card to a given card value;
 };
+
+class CardList {
+public:
+  //Constructors
+	CardList(); //NULL constructor
+  CardList(ifstream file); //creates linkedlist given file
+
+  //Destructor
+  ~CardList(); 
+
+  //mutators functions
+  void append(const string c); //adds card c to end of list
+  void remove(const int n);     //removes card at index n
+  void clear();                //completely empties a list
+  string search_remove(const string c);//removes first card that                                             matches the given string
+
+  //accessor functions
+  friend ostream& operator<<(ostream& out, CardList& list); //output remaining cards in list
+  bool empty() const;          //returns true if empty, false if not empty
+  string at(const int n) const;   //returns card at index n
+  int size() const;               //returns size of list
+
+private:
+	Card* head;
+
+};
+
 
 class Player {
 	Player();
 
-  void turn(Player p);
+  void turn(Player p); //executes code for a player's turn
 
 
 private:
@@ -32,28 +62,7 @@ private:
 };
 
 
-class CardList {
-	CardList();
 
-
-  ~CardList();
-
-  //mutators functions
-  void append(const string c); //adds card c to end of list
-  void remove(const int n);     //removes card at index n
-  void clear();                //completely empties a list
-
-  //accessor functions
-  friend ostream operator<<(CardList list) const; //output remaining cards in list
-  bool is_empty() const;          //returns true if empty, false if not empty
-  string at(const int n) const;   //returns card at index n
-  int size() const;               //returns size of list
-
-private:
-	Card* head;
-  int size;
-
-};
 
 
 #endif
