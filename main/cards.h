@@ -1,5 +1,5 @@
 //cards.h
-//Authors: Your Partner's Name and Your Name
+//Authors: Chase Alcorn, Andy Wu
 //All class declarations go here
 
 #ifndef CARDS_H
@@ -9,21 +9,25 @@
 
 using namespace std;
 
-class Card
+struct Card
 {
-	Card(string c = "", Card* n = nullptr);
-
-private:
 	Card* next;
-	string card;
+	string data;
 
+  Card(string c = "", Card* n = nullptr): data(c), next(n) {}
+
+  bool operator==(Card c) const;
 };
 
 class Player {
 	Player();
 
+  void turn(Player p);
+
+
 private:
 	string name;
+  CardList cards;
 
 };
 
@@ -32,10 +36,22 @@ class CardList {
 	CardList();
 
 
+  ~CardList();
+
+  //mutators functions
+  void append(const string c); //adds card c to end of list
+  void remove(const int n);     //removes card at index n
+  void clear();                //completely empties a list
+
+  //accessor functions
+  friend ostream operator<<(CardList list) const; //output remaining cards in list
+  bool is_empty() const;          //returns true if empty, false if not empty
+  string at(const int n) const;   //returns card at index n
+  int size() const;               //returns size of list
 
 private:
 	Card* head;
-
+  int size;
 
 };
 

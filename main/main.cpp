@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 
+#include "cards.h"
+
 using namespace std;
 
 int main(int argv, char** argc){
