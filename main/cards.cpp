@@ -20,6 +20,15 @@ CardList::CardList(){
   head = nullptr;
 }
 
+CardList::CardList(ifstream& file) {
+    head = nullptr;
+
+    string line;
+    while (getline(file, line)) {
+        append(line);
+    }
+}
+
 
 CardList::~CardList(){
   Card* tmp;
@@ -52,6 +61,7 @@ void CardList::append(string c){
 void CardList::remove(const int n){
   if(n>size()){
     cout << "REMOVE() OUT OF RANGE, " << n << " LARGER THAN " << size() << endl;
+    return;
   }
 
   Card* currObj = head;
@@ -65,27 +75,27 @@ void CardList::remove(const int n){
 }
 
 
-string CardList::search_remove(const string c){
+bool CardList::search_remove(const string c){
   Card* cur = head;
   string output;
   if(!head){
-    return "CARDLIST CONTAINS NO CARDS";
+    return false;
   }
   if(head->data == c){
     delete head;
     head = 0;
-    return c;
+    return true;
   }
   while(cur->next){
     if(cur->next->data == c){
       Card* tmp = cur->next->next;
       delete cur->next;
       cur->next = tmp;
-      return c;
+      return true;
     }
     cur = cur->next;
   }
-  return "NO MATCHING CARDS";
+  return false;
 }
 
 bool CardList::empty() const{
@@ -125,3 +135,23 @@ ostream& operator<<(ostream& out, CardList& list){
   }
   return out;
 }
+
+Player::Player(string n, ifstream& file): name(n), cards(file), currCard(0){}
+
+void Player::print(){
+    cout << name << "'s cards:" << endl << cards;
+}
+
+bool Player::turn(Player& p) {
+
+    for (currCard; currCard < cards.size(); currCard++) {
+        if (p.cards.search_remove(cards.at(currCard))) {
+            cout << name << " picked matching card " << cards.at(currCard) << endl;
+            cards.remove(currCard);
+            return true;
+        }
+    }
+    return false;
+}
+
+

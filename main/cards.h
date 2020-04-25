@@ -16,7 +16,7 @@ struct Card
     Card* next;
 	string data;
     
-    Card(string c = "", Card* n = nullptr): data(c), next(n) {}
+    Card(string c = ""): data(c), next(nullptr) {}
 
     bool operator==(Card c) const; //boolean operator to compare data of card to a given card value
 };
@@ -25,7 +25,7 @@ class CardList {
 public:
     //Constructors
 	CardList(); //Empty List constructor
-    CardList(ifstream file); //creates linkedlist given file
+    CardList(ifstream& file); //creates linkedlist given file
 
   
     ~CardList(); //Destructor
@@ -33,7 +33,7 @@ public:
     //mutators functions
     void append(const string c); //adds card c to end of list
     void remove(const int n);     //removes card at index n
-    string search_remove(const string c);   //removes first card that matches the given string
+    bool search_remove(const string c);   //removes first card that matches the given string, returns true if successful
 
     //accessor functions
     friend ostream& operator<<(ostream& out, CardList& list); //output remaining cards in list
@@ -48,15 +48,21 @@ private:
 
 
 class Player {
-	Player();
+public:
+	Player(string n, ifstream& file); //constructor, pass in a name string and a file to initialize CardList
 
-    void turn(Player p); //executes code for a player's turn
+    //mutator member function
+    bool turn(Player& p); //executes code for a player's turn, returns false if no more cards left
+
+
+    //accessor member function
+    void print(); //print name and current cards
 
 
 private:
 	string name;
     CardList cards;
-
+    int currCard;
 };
 
 
