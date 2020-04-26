@@ -16,9 +16,6 @@ bool Card::operator==(Card c) const{
 
 //ALL CARDLIST MEMBER FUNCTIONS
 
-CardList::CardList(){
-  head = nullptr;
-}
 
 CardList::CardList(ifstream& file) {
     head = nullptr;
@@ -41,21 +38,28 @@ CardList::~CardList(){
 
 
 void CardList::append(string c){
-  if(empty()){
+  if(!head){
     head = new Card(c);
     return;
   }
+  recursive_append(head, c);
 
-  Card* currObj = head;
-  
-  while(currObj->next){
-    currObj = currObj->next;
-  }
+  //Card* currObj = head;
+  //
+  //while(currObj->next){
+  //  currObj = currObj->next;
+  //}
 
-  currObj->next = new Card(c);
-
+  //currObj->next = new Card(c);
 }
 
+void CardList::recursive_append(Card* c, const string s) {
+    if (!c->next) {
+        c->next = new Card(s);
+        return;
+    }
+    recursive_append(c->next, s);
+}
 
 
 void CardList::remove(const int n){
@@ -98,9 +102,7 @@ bool CardList::search_remove(const string c){
   return false;
 }
 
-bool CardList::empty() const{
-  return head==nullptr;
-}
+
 
 string CardList::at(const int n) const{
   if(n>size()){
@@ -117,17 +119,24 @@ string CardList::at(const int n) const{
 }
 
 int CardList::size() const{
-  if(empty()){
-    return 0;
-  }
-  Card* currObj = head;
+    return recursive_size(head);
+
+  /*Card* currObj = head;
   int count=0;
   while(currObj){
     count++;
     currObj=currObj->next;
   }
-  return count;
+  return count;*/
 }
+
+int CardList::recursive_size(Card* c) const {
+    if (!c) {
+        return 0;
+    }
+    return recursive_size(c->next) + 1;
+}
+
 
 ostream& operator<<(ostream& out, CardList& list){
   for(int i=0;i<list.size();i++){
@@ -136,10 +145,13 @@ ostream& operator<<(ostream& out, CardList& list){
   return out;
 }
 
+//ALL PLAYER MEMBER FUNCTIONS
+
 Player::Player(string n, ifstream& file): name(n), cards(file), currCard(0){}
 
-void Player::print(){
-    cout << name << "'s cards:" << endl << cards;
+ostream& operator<<(ostream& out, Player& p){
+    out << p.name << "'s cards:" << endl << p.cards;
+    return out;
 }
 
 bool Player::turn(Player& p) {

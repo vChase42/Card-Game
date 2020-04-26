@@ -15,7 +15,6 @@ int main(int argv, char** argc){
   
    ifstream cardFile1 (argc[1]);
    ifstream cardFile2 (argc[2]);
-   string line;
 
    if (cardFile1.fail()){
      cout << "Could not open file " << argc[1];
@@ -42,11 +41,10 @@ int main(int argv, char** argc){
    //Start Game
 
    while (p1.turn(p2) && p2.turn(p1)) {}
+   cout << endl;
 
-   cout << endl;
-   p1.print();
-   cout << endl;
-   p2.print();
+   cout << p1 << endl;
+   cout << p2;
 
 
 

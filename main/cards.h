@@ -24,10 +24,8 @@ struct Card
 class CardList {
 public:
     //Constructors
-	CardList(); //Empty List constructor
     CardList(ifstream& file); //creates linkedlist given file
 
-  
     ~CardList(); //Destructor
 
     //mutators functions
@@ -37,12 +35,15 @@ public:
 
     //accessor functions
     friend ostream& operator<<(ostream& out, CardList& list); //output remaining cards in list
-    bool empty() const;          //returns true if empty, false if not empty
     string at(const int n) const;   //returns card at index n
     int size() const;               //returns size of list
 
 private:
 	Card* head;
+
+    //helper functions
+    int recursive_size(Card* c) const;
+    void recursive_append(Card* c, const string s);
 
 };
 
@@ -54,9 +55,8 @@ public:
     //mutator member function
     bool turn(Player& p); //executes code for a player's turn, returns false if no more cards left
 
-
     //accessor member function
-    void print(); //print name and current cards
+    friend ostream& operator<<(ostream&, Player&); //print name and current cards
 
 
 private:
