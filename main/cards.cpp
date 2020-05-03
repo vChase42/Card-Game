@@ -26,6 +26,10 @@ CardList::CardList(ifstream& file) {
     }
 }
 
+CardList::CardList(){
+    head = nullptr;
+}
+
 
 CardList::~CardList(){
   Card* tmp;
@@ -116,6 +120,18 @@ string CardList::at(const int n) const{
   }
 
   return currObj->data;
+}
+
+Card* CardList::getCard(const int n){
+  if(n > size()){
+    cout<<"GETCARD() OUT OF RANGE, "<<n<<" LARGER THAN "<<size()<<endl;
+    return NULL;
+  }
+  Card* currObj = head;
+  for(int i = 0; i < n; i++){
+    currObj = currObj->next;
+  }
+  return currObj;
 }
 
 int CardList::size() const{

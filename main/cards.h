@@ -25,6 +25,8 @@ class CardList {
 public:
     //Constructors
     CardList(ifstream& file); //creates linkedlist given file
+    //NULL construsctor
+    CardList();
 
     ~CardList(); //Destructor
 
@@ -36,6 +38,7 @@ public:
     //accessor functions
     friend ostream& operator<<(ostream& out, CardList& list); //output remaining cards in list
     string at(const int n) const;   //returns card at index n
+    Card* getCard(const int n);     //returns card node at index n
     int size() const;               //returns size of list
 
 private:

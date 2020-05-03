@@ -26,6 +26,8 @@ void test_append_empty_list(); // A test case for append
 void test_append_single_element_list(); // Tests cases should be independent,
             // small, fast, orthogonal
 void test_equal_empty_list();
+void test_equal_single_element_list();
+
 void test_card_operator_double_equal();
 
 void START_TEST(string testname){
@@ -55,15 +57,15 @@ void assertEquals(int expected, int actual, string testDescription){
 
 
 // You should add more assertEquals function for your classes. For example, Node/Card class
-/*
-void assertEquals(Node *expected, Node *actual, string testDescription){
+
+void assertEquals(Card *expected, Card *actual, string testDescription){
   if (expected == actual) {
     cout<<"PASSED " << endl;
   } else {
-    cout<< "  FAILED: "<< testDescription << endl <<"   Expected: "<< expected << " Actual: " << actual << endl;
+    cout<< "  FAILED: "<< testDescription << endl <<"   Expected: "<< expected->data << " Actual: " << actual->data << endl;
   }
 }
-*/
+
 
 
 #endif
