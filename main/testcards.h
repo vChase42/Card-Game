@@ -66,6 +66,12 @@ void assertEquals(Card *expected, Card *actual, string testDescription){
   }
 }
 
-
+void assertEquals(Card& expected, Card& actual, string testDescription){
+  if (expected == actual){
+    cout<<"PASSED " << endl;
+  } else {
+    cout<< "  FAILED: "<< testDescription << endl <<"   EXPECTED: "<< expected.data << " Actual: " << actual.data <<endl;
+  }
+}
 
 #endif

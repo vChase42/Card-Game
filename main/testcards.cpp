@@ -79,32 +79,14 @@ void test_equal_single_element_list(){
 
 void test_card_operator_double_equal(){
   // Test to check if == is overloaded for card
-  CardList l1, l2;
-  l1.append("c 9");
-  assertEquals(l1.getCard(0), l1.getCard(0), "test operator== with same node");
-  l2.append("c 9");
-  assertEquals(l1.getCard(0), l2.getCard(0), "test operator== same data but different CardList");
-  if(l1.getCard(0) == l2.getCard(0))
-	  cout<<"good"<<endl;
-  else
-	  cout<<"no"<<endl;
-  Card a1, a2, a3, a4;
-  a1.data = "c 9";
-  //a1.next = l1.getCard(0);
-  a2.data = "c 9";
-  //a2.next = l2.getCard(0);
-  if(a1 == a2)
-	  cout<<"yep"<<endl;
-  else
-	  cout<<"nop"<<endl;
-  a3.data = l1.getCard(0)->data;
-  a3.next = l1.getCard(0)->next;
-  a4.data = l2.getCard(0)->data;
-  a4.next = l2.getCard(0)->next;
-  if(a3 == a4)
-	  cout<<"ok"<<endl;
-  else
-	  cout<<"lol no"<<endl;
+  Card c1, c2, c3;
+  c1.data = "c 9";
+  c2.data = "c 9";
+  c3.data = "h k";
+  c1.next = &c3;
+  c2.next = &c3;
+  assertEquals(c1, c1, "test operator== with same node");
+  assertEquals(c2, c1, "test operator== same data but different node");
 }
 
 
