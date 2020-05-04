@@ -33,7 +33,7 @@ public:
     //mutators functions
     void append(const string c); //adds card c to end of list
     void remove(const int n);     //removes card at index n
-    bool search_remove(const string c);   //removes first card that matches the given string, returns true if successful
+    bool search_remove(const Card c);   //removes first card that matches the given string, returns true if successful. Makes use use Card == Operator
 
     //accessor functions
     friend ostream& operator<<(ostream& out, CardList& list); //output remaining cards in list
@@ -45,8 +45,8 @@ private:
 	Card* head;
 
     //helper functions
-    int recursive_size(Card* c) const;
-    void recursive_append(Card* c, const string s);
+    int size(Card* c) const;
+    void append(Card* c, const string s);
 
 };
 

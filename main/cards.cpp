@@ -46,7 +46,7 @@ void CardList::append(string c){
     head = new Card(c);
     return;
   }
-  recursive_append(head, c);
+  append(head, c);
 
   //Card* currObj = head;
   //
@@ -57,12 +57,12 @@ void CardList::append(string c){
   //currObj->next = new Card(c);
 }
 
-void CardList::recursive_append(Card* c, const string s) {
+void CardList::append(Card* c, const string s) {
     if (!c->next) {
         c->next = new Card(s);
         return;
     }
-    recursive_append(c->next, s);
+    append(c->next, s);
 }
 
 
@@ -82,20 +82,20 @@ void CardList::remove(const int n){
 
 }
 
-
-bool CardList::search_remove(const string c){
+//MAKES USE OF CARD CLASS == OPERATOR
+bool CardList::search_remove(const Card c){
   Card* cur = head;
   string output;
   if(!head){
     return false;
   }
-  if(head->data == c){
+  if(*head == c){
     delete head;
     head = 0;
     return true;
   }
   while(cur->next){
-    if(cur->next->data == c){
+    if(*(cur->next) == c){
       Card* tmp = cur->next->next;
       delete cur->next;
       cur->next = tmp;
@@ -135,7 +135,7 @@ Card* CardList::getCard(const int n){
 }
 
 int CardList::size() const{
-    return recursive_size(head);
+    return size(head);
 
   /*Card* currObj = head;
   int count=0;
@@ -146,11 +146,11 @@ int CardList::size() const{
   return count;*/
 }
 
-int CardList::recursive_size(Card* c) const {
+int CardList::size(Card* c) const {
     if (!c) {
         return 0;
     }
-    return recursive_size(c->next) + 1;
+    return size(c->next) + 1;
 }
 
 
@@ -173,7 +173,7 @@ ostream& operator<<(ostream& out, Player& p){
 bool Player::turn(Player& p) {
 
     for (currCard; currCard < cards.size(); currCard++) {
-        if (p.cards.search_remove(cards.at(currCard))) {
+        if (p.cards.search_remove(*cards.getCard(currCard))) {
             cout << name << " picked matching card " << cards.at(currCard) << endl;
             cards.remove(currCard);
             return true;
