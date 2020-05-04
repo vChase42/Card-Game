@@ -37,6 +37,8 @@ int main(int argv, char** argc){
    Player p1("Alice", cardFile1);
    Player p2("Bob", cardFile2);
 
+   cardFile1.close();
+   cardFile2.close();
    
    //Start Game
 
@@ -44,7 +46,7 @@ int main(int argv, char** argc){
    cout << endl;
 
    cout << p1 << endl;
-   cout << p2;
+   cout << p2 << endl;
 
 
 

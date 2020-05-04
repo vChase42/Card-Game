@@ -72,14 +72,30 @@ void CardList::remove(const int n){
     return;
   }
 
-  Card* currObj = head;
-  for(int i=0;i<n-1;i++){
-    currObj = currObj->next;
+  if (remove(head, n)) {
+      delete head;
+      head = nullptr;
   }
-  Card* temp = currObj->next->next;
-  delete currObj->next;
-  currObj->next = temp;
 
+  //Card* currObj = head;
+  //for(int i=0;i<n-1;i++){
+  //  currObj = currObj->next;
+  //}
+  //Card* temp = currObj->next->next;
+  //delete currObj->next;
+  //currObj->next = temp;
+}
+
+bool CardList::remove(Card* c, const int n) {
+    if (n == 0) {
+        return true;
+    }
+    if (remove(c->next, n - 1)) {
+        Card* temp = c->next->next;
+        delete c->next;
+        c->next = temp;
+    }
+    return false;
 }
 
 //MAKES USE OF CARD CLASS == OPERATOR
@@ -109,29 +125,45 @@ bool CardList::search_remove(const Card c){
 
 
 string CardList::at(const int n) const{
-  if(n>size()){
-    cout << "AT() OUT OF RANGE, " << n << " LARGER THAN " << size() << endl;
-    return "";
-  }
+    if(n>size()){
+        cout << "AT() OUT OF RANGE, " << n << " LARGER THAN " << size() << endl;
+        return "";
+    }
+    return at(head, n);
 
-  Card* currObj = head;
-  for(int i=0;i<n;i++){
-    currObj = currObj->next;
-  }
+  //Card* currObj = head;
+  //for(int i=0;i<n;i++){
+  //  currObj = currObj->next;
+  //}
 
-  return currObj->data;
+  //return currObj->data;
 }
 
-Card* CardList::getCard(const int n){
-  if(n > size()){
-    cout<<"GETCARD() OUT OF RANGE, "<<n<<" LARGER THAN "<<size()<<endl;
-    return NULL;
-  }
-  Card* currObj = head;
-  for(int i = 0; i < n; i++){
-    currObj = currObj->next;
-  }
-  return currObj;
+string CardList::at(Card* c, const int n) const {
+    if (n == 0) {
+        return c->data;
+    }
+    return at(c->next, n - 1);
+}
+
+Card* CardList::getCard(const int n) const{
+    if(n > size()){
+        cout<<"GETCARD() OUT OF RANGE, "<<n<<" LARGER THAN "<<size()<<endl;
+        return NULL;
+    }
+    return getCard(head, n);
+  //Card* currObj = head;
+  //for(int i = 0; i < n; i++){
+  //  currObj = currObj->next;
+  //}
+  //return currObj;
+}
+
+Card* CardList::getCard(Card* c, const int n) const {
+    if (n == 0) {
+        return c;
+    }
+    return getCard(c->next, n - 1);
 }
 
 int CardList::size() const{
@@ -171,7 +203,6 @@ ostream& operator<<(ostream& out, Player& p){
 }
 
 bool Player::turn(Player& p) {
-
     for (currCard; currCard < cards.size(); currCard++) {
         if (p.cards.search_remove(*cards.getCard(currCard))) {
             cout << name << " picked matching card " << cards.at(currCard) << endl;

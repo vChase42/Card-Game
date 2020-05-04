@@ -38,13 +38,16 @@ public:
     //accessor functions
     friend ostream& operator<<(ostream& out, CardList& list); //output remaining cards in list
     string at(const int n) const;   //returns card at index n
-    Card* getCard(const int n);     //returns card node at index n
+    Card* getCard(const int n) const;     //returns card node at index n
     int size() const;               //returns size of list
 
 private:
 	Card* head;
 
-    //helper functions
+    //Recursive helper functions
+    string at(Card* c, const int n) const;
+    Card* getCard(Card* c, const int n) const;
+    bool remove(Card* c, const int n);
     int size(Card* c) const;
     void append(Card* c, const string s);
 
