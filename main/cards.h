@@ -13,10 +13,11 @@ using namespace std;
 //struct for node Card
 struct Card
 {
-    Card* next;
-	string data;
-    
     Card(string c = ""): data(c), next(nullptr) {}
+    
+    string data;
+    Card* next;
+	  
 
     bool operator==(Card c) const; //boolean operator to compare data of card to a given card value
 };
