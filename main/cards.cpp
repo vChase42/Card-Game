@@ -67,14 +67,15 @@ void CardList::append(Card* c, const string s) {
 
 
 void CardList::remove(const int n){
-  if(n>size()){
+  if(n>=size()){
     cout << "REMOVE() OUT OF RANGE, " << n << " LARGER THAN " << size() << endl;
     return;
   }
 
   if (remove(head, n)) {
+      Card* tmp = head->next;
       delete head;
-      head = nullptr;
+      head = tmp;
   }
 
   //Card* currObj = head;
@@ -125,7 +126,7 @@ bool CardList::search_remove(const Card c){
 
 
 string CardList::at(const int n) const{
-    if(n>size()){
+    if(n>=size()){
         cout << "AT() OUT OF RANGE, " << n << " LARGER THAN " << size() << endl;
         return "";
     }
@@ -147,7 +148,7 @@ string CardList::at(Card* c, const int n) const {
 }
 
 Card* CardList::getCard(const int n) const{
-    if(n > size()){
+    if(n >= size()){
         cout<<"GETCARD() OUT OF RANGE, "<<n<<" LARGER THAN "<<size()<<endl;
         return NULL;
     }
@@ -203,13 +204,13 @@ ostream& operator<<(ostream& out, Player& p){
 }
 
 bool Player::turn(Player& p) {
-    for (int temp = currCard; temp < cards.size(); temp++) {
-      currCard++;
-        if (p.cards.search_remove(*cards.getCard(temp))) {
-            cout << name << " picked matching card " << cards.at(temp) << endl;
-            cards.remove(temp);
+    while (currCard < cards.size()) {
+        if (p.cards.search_remove(*cards.getCard(currCard))) {
+            cout << name << " picked matching card " << cards.at(currCard) << endl;
+            cards.remove(currCard);
             return true;
         }
+        currCard++;
     }
     return false;
 }
