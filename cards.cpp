@@ -203,10 +203,11 @@ ostream& operator<<(ostream& out, Player& p){
 }
 
 bool Player::turn(Player& p) {
-    for (currCard; currCard < cards.size(); currCard++) {
-        if (p.cards.search_remove(*cards.getCard(currCard))) {
-            cout << name << " picked matching card " << cards.at(currCard) << endl;
-            cards.remove(currCard);
+    for (int temp = currCard; temp < cards.size(); temp++) {
+      currCard++;
+        if (p.cards.search_remove(*cards.getCard(temp))) {
+            cout << name << " picked matching card " << cards.at(temp) << endl;
+            cards.remove(temp);
             return true;
         }
     }

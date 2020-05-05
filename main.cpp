@@ -46,7 +46,7 @@ int main(int argv, char** argc){
    cout << endl;
 
    cout << p1 << endl;
-   cout << p2 << endl;
+   cout << p2;
 
 
 

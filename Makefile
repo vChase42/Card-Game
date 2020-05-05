@@ -8,13 +8,13 @@ cards: cards.o main.o
 	g++ cards.o main.o -o cards 
   
 testcards.o: testcards.cpp
-	g++ -c testcards.cpp
+	g++ -c -Wall testcards.cpp
 
 cards.o: cards.cpp
-	g++ -c cards.cpp
+	g++ -c -Wall cards.cpp
 
 main.o: main.cpp
-	g++ -c main.cpp
+	g++ -c -Wall main.cpp
   
 clean:
 	rm *.o testcards cards
